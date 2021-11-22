@@ -29,7 +29,24 @@
 
 <script>
 export default {
-  
+  data(){
+    return {
+      deck: [
+        {
+          _id: 1,
+          title: 'Deck 1'
+        },
+        {
+          _id: 2,
+          title: 'Deck 2'
+        },
+        {
+          _id: 3,
+          title: 'Deck 3'
+        },
+      ]
+    }
+  }
 }
 </script>
 
