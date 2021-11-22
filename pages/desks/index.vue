@@ -81,13 +81,18 @@ export default {
         },
       ]
       })
-    }, 1500)
+    }, 1000)
     }).then((data) => {
       return data
     }).catch((e) => {
       // eslint-disable-next-line unicorn/error-message
       context.error(e)
     })
+  },
+  create() {
+    this.$store.dispatch('setDecks', this.desks)
+    // eslint-disable-next-line no-console
+    console.log(this.$store.getters.decks)
   },
   methods: {
     openModal() {

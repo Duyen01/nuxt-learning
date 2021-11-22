@@ -74,13 +74,12 @@ export default {
                 thumbnail: 'https://wallpaperbat.com/img/566655-english-class-wallpaper-png-free-english-class-wallpaperpng-transparent-image.png'
               }          
           })
-        }, 1500)
+        }, 1000)
       }).then((data) => {
         return data
       }).catch((e) => {
         console.log(e)
       })
-      
     },
     data() {
         return {
