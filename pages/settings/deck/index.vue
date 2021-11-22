@@ -6,7 +6,7 @@
                     <nuxt-link to="/settings">General</nuxt-link>
                 </li>
                 <li>
-                    <nuxt-link to="/settings/desk">Desk</nuxt-link>
+                    <nuxt-link to="/settings/deck">Deck</nuxt-link>
                 </li>
                 <li>
                     <nuxt-link to="/settings/schedule">Schedule</nuxt-link>

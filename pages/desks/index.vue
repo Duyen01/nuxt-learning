@@ -9,7 +9,7 @@
       </div>
       <ul class="decks-list">
         <deck-list 
-        v-for="deck in desks" 
+        v-for="deck in decks" 
         :id="deck._id" 
         :key="deck._id"
         :name="deck.name" 
@@ -55,12 +55,12 @@ export default {
   components: {
     DeckList
   },
-  asyncData(context) {
+  fetch(context) {
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line nuxt/no-timing-in-fetch-data
     setTimeout(() => {
       resolve({
-        desks: [
+        decks: [
         {
           _id: 1,
           name: 'Learn English',
@@ -83,16 +83,16 @@ export default {
       })
     }, 1000)
     }).then((data) => {
-      return data
+      context.store.dispatch('setDecks', data.decks)
     }).catch((e) => {
       // eslint-disable-next-line unicorn/error-message
       context.error(e)
     })
   },
-  create() {
-    this.$store.dispatch('setDecks', this.desks)
-    // eslint-disable-next-line no-console
-    console.log(this.$store.getters.decks)
+  computed: {
+    desks() {
+      return this.$store.getters.decks
+    }
   },
   methods: {
     openModal() {
