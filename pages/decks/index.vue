@@ -10,8 +10,8 @@
       <ul class="decks-list">
         <deck-list 
         v-for="deck in decks" 
-        :id="deck._id" 
-        :key="deck._id"
+        :id="deck.id" 
+        :key="deck.id"
         :name="deck.name" 
         :description="deck.description" 
         :thumbnail="deck.thumbnail"
@@ -22,40 +22,23 @@
     <v-modal name="createDeckModal">
       <div class="modal_body">
         <h1>Hello modal</h1>
-        <form action="">
-          <div class="form_group">
-            <label for="">Name</label>
-            <input class="form_control" type="text" placeholder="Please enter name deck" />
-          </div>
-          <div class="form_group">
-            <label for="">Desciption</label>
-            <input class="form_control" type="text" placeholder="Please enter name Desciption" />
-          </div>
-          <div class="form_group">
-            <label for="">Thumbnail</label>
-            <input type="file" />
-          </div>
-          <div class="form_group d_flex justify_content_end">
-                <button class="btn btn_danger" @click.prevent="closeModal">
-                    Close Modal
-                </button>
-                <button class="btn btn_success md_1" @click.prevent="createDeck">
-                    Create
-                </button>
-          </div>
-        </form>
+        <deck-form @submit="onSubmit" />
       </div>
     </v-modal>
     <!-- end modal -->
   </div>
 </template>
 <script>
+import axios from 'axios'
+
 import DeckList from '@/components/Decks/DeckList'
+import DeckForm from '@/components/Decks/DeckForm'
 export default {
   components: {
-    DeckList
+    DeckList,
+    DeckForm
   },
-  fetch(context) {
+  asyncData(context) {
     return new Promise((resolve, reject) => {
       // eslint-disable-next-line nuxt/no-timing-in-fetch-data
     setTimeout(() => {
@@ -83,17 +66,16 @@ export default {
       })
     }, 1000)
     }).then((data) => {
-      console.log(this.store)
-      context.store.dispatch('setDecks', data.decks)
+      return data
     }).catch((e) => {
       // eslint-disable-next-line unicorn/error-message
       context.error(e)
     })
   },
-  computed: {
-    decks() {
-      return this.$store.getters.decks
-    }
+  create() {
+    this.$store.dispatch('setDecks', this.decks)
+    // eslint-disable-next-line no-console
+    console.log(this.$store.getters.decks)
   },
   methods: {
     openModal() {
@@ -102,6 +84,24 @@ export default {
     closeModal() {
       this.$modal.close({ name: 'createDeckModal' })
     },
+    onSubmit(deckData) {
+      axios.post('https://nuxt-learning-2866a-default-rtdb.firebaseio.com/decks.json', deckData)
+      .then((data) => {
+        // eslint-disable-next-line no-console
+        console.log(data)
+      })
+      .catch((e) => {
+        // eslint-disable-next-line no-console
+        console.log(e)
+      })
+    },
+    // eslint-disable-next-line require-await
+    async getData() {
+      const messageRef = this.$fireDb.ref('cases') // Where 'cases' is the json object
+      axios.get(messageRef.toString() + '.json').then(response => {
+        console.log(response.data)
+      })
+    }
   },
 }
 </script>
