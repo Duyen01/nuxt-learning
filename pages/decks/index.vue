@@ -9,7 +9,7 @@
       </div>
       <ul class="decks-list">
         <deck-list 
-        v-for="deck in desks" 
+        v-for="deck in decks" 
         :id="deck._id" 
         :key="deck._id"
         :name="deck.name" 
@@ -60,7 +60,7 @@ export default {
       // eslint-disable-next-line nuxt/no-timing-in-fetch-data
     setTimeout(() => {
       resolve({
-        desks: [
+        decks: [
         {
           _id: 1,
           name: 'Learn English',
@@ -90,7 +90,7 @@ export default {
     })
   },
   create() {
-    this.$store.dispatch('setDecks', this.desks)
+    this.$store.dispatch('setDecks', this.decks)
     // eslint-disable-next-line no-console
     console.log(this.$store.getters.decks)
   },

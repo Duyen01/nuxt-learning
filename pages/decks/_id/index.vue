@@ -109,8 +109,8 @@ export default {
     },
     methods: {
     // showDesk() {
-    //   // this.$router.push('desks/' + this.deskID)
-    //   this.$router.push(`/desks/${this.deskID}`)
+    //   // this.$router.push('decks/' + this.deskID)
+    //   this.$router.push(`/decks/${this.deskID}`)
     // },
     openModal() {
       this.$modal.open({ name: 'createCardModal' })

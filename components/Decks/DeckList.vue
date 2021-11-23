@@ -1,7 +1,7 @@
 <template>
     <div>
         <li>
-          <nuxt-link class="deck" :to="`/desks/${id}`">
+          <nuxt-link class="deck" :to="`/decks/${id}`">
             <div class="card deck-card">
               <img
                 :src="thumbnail"

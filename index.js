@@ -7,7 +7,7 @@ const createStore = () => {
         },
         mutations: {
             setDecks(state, decks){
-                state.deck = decks
+                state.decks = decks
             }
         },
         actions: {
